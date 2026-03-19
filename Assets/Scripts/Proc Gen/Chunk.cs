@@ -7,21 +7,29 @@ public class Chunk : MonoBehaviour
     [SerializeField] GameObject applePrefab;
     [SerializeField] GameObject coinPrefab;
 
-    [SerializeField] float appleSpawnChance = .3f;
+    [SerializeField] float fenceSpawnChance = .5f;
+    [SerializeField] float appleSpawnChance = .12f;
     [SerializeField] float coinSpawnChance = .5f;
     [SerializeField] float coinSeperationLength = 2f;
 
-    [SerializeField] float[] lanes = { -2.5f, 0f, 2.5f };
+    [SerializeField] float[] lanes = { -3f, 0f, 3f };
 
     LevelGenerator levelGenerator;
     ScoreManager scoreManager;
 
     List<int> availableLanes = new List<int> { 0, 1, 2 };
 
+    bool spawnObstacle = true;
+
     public void Init(LevelGenerator levelGenerator, ScoreManager scoreManager)
     {
         this.levelGenerator = levelGenerator;
         this.scoreManager = scoreManager;
+    }
+
+    public void NotSpawnObstacle()
+    {
+        spawnObstacle = false;
     }
 
     void Start()
@@ -33,7 +41,9 @@ public class Chunk : MonoBehaviour
 
     void SpawnFences()
     {
-        int fencesToSpawn = Random.Range(0, lanes.Length);
+        if (Random.value > fenceSpawnChance || !spawnObstacle) return;
+
+        int fencesToSpawn = Random.Range(1, lanes.Length);
 
         for (int i = 0; i < fencesToSpawn; i++)
         {
@@ -48,7 +58,7 @@ public class Chunk : MonoBehaviour
 
     void SpawnApple()
     {
-        if (Random.value > appleSpawnChance || availableLanes.Count <= 0) return;
+        if (Random.value > appleSpawnChance || availableLanes.Count <= 0 ||!spawnObstacle) return;
 
         int selectedLane = SelectLane();
 
@@ -59,7 +69,7 @@ public class Chunk : MonoBehaviour
 
     void SpawnCoins()
     {
-        if (Random.value > coinSpawnChance || availableLanes.Count <= 0) return;
+        if (Random.value > coinSpawnChance || availableLanes.Count <= 0 || !spawnObstacle) return;
 
         int selectedLane = SelectLane();
 

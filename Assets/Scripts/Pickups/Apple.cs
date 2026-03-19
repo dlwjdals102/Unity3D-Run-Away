@@ -14,5 +14,6 @@ public class Apple : Pickup
     protected override void OnPickup()
     {
         levelGenerator.ChangeChunkMoveSpeed(adjustChangeMoveSpeedAmount);
+        playerCollisionHandler.playerController.ChangeMoveSpeed(adjustChangeMoveSpeedAmount / 2);
     }
 }

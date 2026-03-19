@@ -2,9 +2,17 @@ using UnityEngine;
 
 public abstract class Pickup : MonoBehaviour
 {
+
+    protected PlayerCollisionHandler playerCollisionHandler;
+
     [SerializeField] float rotationSpeed = 100f;
 
     const string playerString = "Player";
+
+    void Awake()
+    {
+        playerCollisionHandler = FindFirstObjectByType<PlayerCollisionHandler>();
+    }
 
     void Update()
     {

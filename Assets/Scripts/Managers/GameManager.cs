@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -6,34 +7,34 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] TMP_Text timeText;
     [SerializeField] GameObject gameOverText;
-    [SerializeField] float startTime = 5f;
+    [SerializeField] float startTime = 30f;
 
-    float timeLeft;
+    float playTime;
     public bool GameOver {  get; private set; }
 
-    private void Start()
+    void Start()
     {
-        timeLeft = startTime;
+        playTime = startTime;
     }
 
-    private void Update()
+    void Update()
     {
         DecreaseTime();
     }
 
     public void IncreaseTime(float amount)
     {
-        timeLeft += amount;
+        playTime += amount;
     }
 
     void DecreaseTime()
     {
         if (GameOver) return;
 
-        timeLeft -= Time.deltaTime;
-        timeText.text = timeLeft.ToString("F1");
+        playTime -= Time.deltaTime;
+        timeText.text = playTime.ToString("F1");
 
-        if (timeLeft <= 0f)
+        if (playTime <= 0f)
         {
             PlayerGameOver();
         }

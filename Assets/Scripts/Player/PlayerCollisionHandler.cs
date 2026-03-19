@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerCollisionHandler : MonoBehaviour
 {
     [SerializeField] Animator anim;
+    public PlayerController playerController { get; private set; }
+
     [SerializeField] float collisionCooldown = 1f;
     [SerializeField] float adjustChangeMoveSpeedAmount = -2f;
 
@@ -14,6 +16,8 @@ public class PlayerCollisionHandler : MonoBehaviour
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        playerController = GetComponent<PlayerController>();
+
         levelGenerator = FindFirstObjectByType<LevelGenerator>();
     }
 
@@ -28,6 +32,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         if (cooldownTimer < collisionCooldown) return;
 
         levelGenerator.ChangeChunkMoveSpeed(adjustChangeMoveSpeedAmount);
+        playerController.ChangeMoveSpeed(adjustChangeMoveSpeedAmount / 2);
         anim.SetTrigger(hitString);
         cooldownTimer = 0f;
     }
