@@ -355,6 +355,10 @@ PrefabInstance:
       propertyPath: appleSpawnChance
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3730746073716549013, guid: 470995b203347df48aaff30f21e083f7, type: 3}
+      propertyPath: fenceSpawnChance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1521803784820188370, guid: 470995b203347df48aaff30f21e083f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -458,6 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
   checkpointTimeExtension: 5
+  obstacleDecreaseTimeAmount: 0.2
 --- !u!4 &5913547700343091635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 308976729600650013, guid: 470995b203347df48aaff30f21e083f7, type: 3}

@@ -24,7 +24,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] float maxGravityZ = -8f;
 
     List<GameObject> chunks = new List<GameObject>();
-    int chunksSpawned = 0;
+    [SerializeField] int chunksSpawned = 0;
 
     void Start()
     {
@@ -71,14 +71,15 @@ public class LevelGenerator : MonoBehaviour
         GameObject chunkToSpawn = ChooseChunkToSpwan();
         GameObject newChunkGO = Instantiate(chunkToSpawn, chunkSpawnPos, Quaternion.identity, chunkParent);
         chunks.Add(newChunkGO);
+
         Chunk newChunk = newChunkGO.GetComponent<Chunk>();
         newChunk.Init(this, scoreManager);
         if (chunksSpawned == 0)
         {
-            newChunk.NotSpawnObstacle();
+            newChunk.DisableObstacleSpawn();
         }
-
         chunksSpawned++;
+        newChunk.IncreaseFenceSpawnChange((float)chunksSpawned / 100);
     }
 
     private GameObject ChooseChunkToSpwan()

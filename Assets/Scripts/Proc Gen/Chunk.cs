@@ -7,7 +7,8 @@ public class Chunk : MonoBehaviour
     [SerializeField] GameObject applePrefab;
     [SerializeField] GameObject coinPrefab;
 
-    [SerializeField] float fenceSpawnChance = .5f;
+    [SerializeField] float fenceSpawnChance = .3f;
+    [SerializeField] float maxFenceSpawnChance = .7f;
     [SerializeField] float appleSpawnChance = .12f;
     [SerializeField] float coinSpawnChance = .5f;
     [SerializeField] float coinSeperationLength = 2f;
@@ -27,9 +28,19 @@ public class Chunk : MonoBehaviour
         this.scoreManager = scoreManager;
     }
 
-    public void NotSpawnObstacle()
+    public void DisableObstacleSpawn()
     {
         spawnObstacle = false;
+    }
+
+    public void IncreaseFenceSpawnChange(float amount)
+    {
+        fenceSpawnChance += amount;
+
+        if (fenceSpawnChance >= maxFenceSpawnChance)
+        {
+            fenceSpawnChance = maxFenceSpawnChance;
+        }
     }
 
     void Start()
